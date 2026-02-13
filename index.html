@@ -97,21 +97,94 @@ footer { text-align:center; padding:50px; background:#000; color:#888; font-size
     .form-container { grid-template-columns:1fr; padding:30px; }
     nav { display:none; }
 }
+/* Hamburger menu */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 22px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.menu-toggle span {
+    display: block;
+    height: 3px;
+    background: #fff;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    nav {
+        position: fixed;
+        top: 80px;
+        right: -100%;
+        width: 200px;
+        height: calc(100vh - 80px);
+        background: rgba(0,0,0,0.95);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+        transition: 0.3s;
+        display: flex;
+    }
+
+    nav a {
+        margin: 15px 0;
+        font-size: 1.2rem;
+        width: 100%;
+    }
+
+    nav.active {
+        right: 0;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+}
+
+/* Active link underline */
+nav a.active {
+    color: orange;
+}
+
+nav a.active::after {
+    content:'';
+    position:absolute;
+    bottom:-5px;
+    left:0;
+    width:100%;
+    height:3px;
+    background:orange;
+    border-radius:2px;
+}
+
 </style>
 </head>
 <body>
 
 <header>
-    <div class="logo-container">
-        <img src="logo.jpeg" alt="Logo" class="logo-img">
-        <span class="logo-text">L & J Travel</span>
-    </div>
-    <nav>
-        <a href="#home" class="active">Home</a>
-        <a href="#destinations">Destinations</a>
-        <a href="#booking">Book Now</a>
-        <a href="#booking">Contact</a>
-    </nav>
+  <div class="logo-container">
+      <img src="logo.jpeg" alt="Logo" class="logo-img">
+      <span class="logo-text">L & J Travel</span>
+  </div>
+
+  <nav>
+      <a href="#home" class="active">Home</a>
+      <a href="#destinations">Destinations</a>
+      <a href="#booking">Book Now</a>
+      <a href="#booking">Contact</a>
+  </nav>
+
+  <div class="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+  </div>
 </header>
 
 <section class="hero" id="home">
@@ -216,7 +289,40 @@ footer { text-align:center; padding:50px; background:#000; color:#888; font-size
       });
   });
 </script>
+<script>
+// Hamburger menu toggle
+const menuToggle = document.querySelector('.menu-toggle');
+const nav = document.querySelector('nav');
+
+menuToggle.addEventListener('click', () => {
+  nav.classList.toggle('active');
+});
+
+// Scroll highlight for active section
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('nav a');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 90;
+    const sectionHeight = section.clientHeight;
+    if(pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+      current = section.getAttribute('id');
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if(link.getAttribute('href').includes(current)) {
+      link.classList.add('active');
+    }
+  });
+});
+</script>
+
 </body>
 </html>
+
 
 
