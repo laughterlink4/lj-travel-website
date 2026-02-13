@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L & J Travel Consult | Explore the World</title>
+<link rel="icon" href="logo.jpeg" type="image/jpeg">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary: #00c4ff;
+    --accent: #ff9f43;
+    --glass: rgba(255, 255, 255, 0.15);
+}
+
+/* GLOBAL */
+* { margin:0; padding:0; box-sizing:border-box; scroll-behavior:smooth; }
+body { font-family:'Montserrat', sans-serif; color:#fff; background:#111; overflow-x:hidden; }
+
+/* HEADER */
+header { position: fixed; top:0; width:100%; height:80px; display:flex; justify-content:space-between; align-items:center; padding:0 6%; z-index:1000; background: rgba(0,0,0,0.85); backdrop-filter:blur(10px); }
+.logo-container { display:flex; align-items:center; }
+.logo-img { height:50px; margin-right:10px; border-radius:10px; }
+.logo-text { font-family:'Playfair Display', serif; font-size:1.5rem; font-weight:bold; color:var(--primary); }
+nav a { text-decoration:none; color:#fff; margin-left:25px; font-weight:500; font-size:0.9rem; text-transform:uppercase; transition:0.3s; position:relative; }
+nav a.active::after { content:''; position:absolute; bottom:-5px; left:0; width:100%; height:3px; background:var(--accent); border-radius:2px; }
+nav a:hover { color:var(--accent); }
+
+/* HERO */
+.hero { height:100vh; position:relative; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; overflow:hidden; }
+.hero img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; opacity:0; animation:fadein 12s infinite; z-index:-1; }
+.hero img:nth-child(2) { animation-delay:4s; }
+.hero img:nth-child(3) { animation-delay:8s; }
+@keyframes fadein {0% {opacity:0;} 20% {opacity:1;} 33% {opacity:1;} 53% {opacity:0;} 100% {opacity:0;}}
+.hero-text h1 { font-family:'Playfair Display', serif; font-size:clamp(3rem,8vw,6rem); margin-bottom:20px; text-shadow:2px 4px 12px rgba(0,0,0,0.6);}
+.hero-text p { font-size:1.2rem; max-width:700px; margin-bottom:30px; color:#e0e0e0; text-shadow:1px 2px 8px rgba(0,0,0,0.5); }
+.hero .btn { padding:15px 40px; border-radius:50px; border:none; cursor:pointer; font-weight:bold; background:var(--primary); color:#fff; transition:0.3s; text-decoration:none;}
+.hero .btn:hover { background:#fff; color:var(--primary); transform:translateY(-3px); }
+
+/* DESTINATIONS */
+section { padding:140px 6%; min-height:80vh; position:relative; }
+#destinations { background: url('https://images.unsplash.com/photo-1542317854-f9596d33a1a6?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat; }
+#destinations::before { content:''; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:0; }
+.section-title { text-align:center; margin-bottom:60px; position:relative; z-index:1; }
+.section-title h2 { font-family:'Playfair Display', serif; font-size:3rem; color:var(--primary); margin-bottom:10px; }
+.section-title p { font-size:1.1rem; color:#ccc; }
+.carousel { position:relative; display:flex; align-items:center; z-index:1; }
+.dest-grid { display:flex; gap:25px; overflow-x:auto; scroll-behavior:smooth; padding-bottom:10px; }
+.dest-card { position:relative; min-width:300px; height:450px; border-radius:20px; overflow:hidden; cursor:pointer; flex-shrink:0; transition:0.5s; }
+.dest-card img { width:100%; height:100%; object-fit:cover; transition:0.5s; }
+.dest-card:hover img { transform:scale(1.1); }
+.dest-overlay { position:absolute; bottom:0; left:0; width:100%; height:50%; background:linear-gradient(transparent, rgba(0,0,0,0.9)); display:flex; flex-direction:column; justify-content:flex-end; padding:20px; }
+.dest-overlay h3 { font-size:1.5rem; margin-bottom:5px; color:var(--accent);}
+.dest-overlay p { font-size:1rem; color:#fff; }
+.carousel-btn { position:absolute; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.5); border:none; color:#fff; font-size:2rem; padding:10px; cursor:pointer; border-radius:50%; z-index:10; }
+.carousel-btn.left { left:0; }
+.carousel-btn.right { right:0; }
+
+/* BOOKING / CONTACT */
+#booking { background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat; min-height:90vh; display:flex; justify-content:center; align-items:center; position:relative; }
+.form-container { display:grid; grid-template-columns:1fr 1fr; gap:50px; background:rgba(0,0,0,0.7); padding:50px; border-radius:30px; max-width:1200px; margin:auto; position:relative; z-index:1; }
+.booking-info h3 { font-size:2.5rem; margin-bottom:20px; color:var(--accent);}
+.booking-info p { margin-bottom:10px; line-height:1.5; }
+form input, form select, form textarea { width:100%; padding:15px; margin-bottom:20px; background: rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.2); border-radius:10px; color:#fff; outline:none; }
+form select { -webkit-appearance: none; -moz-appearance: none; appearance: none; color: #fff; background: rgba(15, 15, 15, 0.6); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 15px; outline: none; font-size: 1rem; }
+form button { background:var(--primary); color:#fff; padding:15px; border:none; border-radius:50px; font-weight:bold; cursor:pointer; width:100%; transition:0.3s; }
+form button:hover { background:#fff; color:var(--primary); transform:translateY(-3px); }
+
+/* Loading overlay */
+#loadingOverlay { 
+    display:none; 
+    position:fixed; 
+    top:0; left:0; width:100%; height:100%; 
+    background:rgba(0,0,0,0.7); 
+    color:#fff; font-size:1.5rem; 
+    justify-content:center; align-items:center; z-index:2000; 
+    flex-direction:column; 
+}
+#loadingOverlay span { margin-top:15px; font-size:1.2rem; }
+
+/* Location button */
+.location-btn { position:fixed; bottom:100px; right:20px; background:var(--accent); color:#fff; padding:15px 20px; border-radius:30px; font-weight:bold; text-decoration:none; box-shadow:0 4px 10px rgba(0,0,0,0.3); z-index:1000; transition:0.3s; }
+.location-btn:hover { background:#ffb14d; }
+
+/* WhatsApp button */
+.whatsapp-btn { position:fixed; bottom:20px; right:20px; z-index:1000; }
+.whatsapp-btn img { width:60px; height:60px; }
+
+/* FOOTER */
+footer { text-align:center; padding:50px; background:#000; color:#888; font-size:0.9rem; border-top:1px solid #222; }
+
+/* MEDIA */
+@media(max-width:768px){
+    .form-container { grid-template-columns:1fr; padding:30px; }
+    nav { display:none; }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="logo-container">
+        <img src="logo.jpeg" alt="Logo" class="logo-img">
+        <span class="logo-text">L & J Travel</span>
+    </div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#destinations">Destinations</a>
+        <a href="#booking">Book Now</a>
+        <a href="#booking">Contact</a>
+    </nav>
+</header>
+
+<section class="hero" id="home">
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80" alt="Beach">
+    <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1920&q=80" alt="Mountains">
+    <img src="https://images.unsplash.com/photo-1493558103817-58b2924bce98?auto=format&fit=crop&w=1920&q=80" alt="City travel">
+    <div class="hero-text">
+        <h1>Discover Your Next Adventure</h1>
+        <p>Luxury travel experiences curated for explorers and dreamers alike.</p>
+        <a href="#destinations" class="btn">Explore Destinations</a>
+    </div>
+</section>
+
+<section id="destinations">
+    <div class="section-title">
+        <h2>Top Destinations</h2>
+        <p>Hand-picked locations for unforgettable experiences</p>
+    </div>
+    <div class="carousel">
+        <button class="carousel-btn left">&#10094;</button>
+        <div class="dest-grid">
+            <div class="dest-card"><img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=600&q=80" alt="Dubai"><div class="dest-overlay"><h3>Dubai, UAE</h3><p>Luxury & Modern</p></div></div>
+            <div class="dest-card"><img src="https://images.unsplash.com/photo-1485738422979-f5c462d49f74?auto=format&fit=crop&w=600&q=80" alt="New York"><div class="dest-overlay"><h3>New York, USA</h3><p>The City That Never Sleeps</p></div></div>
+            <div class="dest-card"><img src="https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=600&q=80" alt="Banff"><div class="dest-overlay"><h3>Banff, Canada</h3><p>Nature’s Masterpiece</p></div></div>
+            <div class="dest-card"><img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=600&q=80" alt="Paris"><div class="dest-overlay"><h3>Paris, France</h3><p>Romantic Getaways</p></div></div>
+            <div class="dest-card"><img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&w=600&q=80" alt="Kyoto"><div class="dest-overlay"><h3>Kyoto, Japan</h3><p>Ancient Traditions</p></div></div>
+            <div class="dest-card"><img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&w=600&q=80" alt="Bali"><div class="dest-overlay"><h3>Bali, Indonesia</h3><p>Tropical Bliss</p></div></div>
+        </div>
+        <button class="carousel-btn right">&#10095;</button>
+    </div>
+</section>
+
+<section id="booking">
+  <div class="form-container">
+    <div class="booking-info">
+      <h3>Get in Touch</h3>
+      <p>Fill out the form to reserve your dream vacation or request a consultation from our travel experts.</p>
+      <p><strong>Email:</strong> laughterlink4@gmail.com</p>
+      <p><strong>Phone:</strong> +233 55 503 8082</p>
+      <p><strong>Location:</strong> Haatso DVLA road, Bohye taxi rank</p>
+    </div>
+
+    <div class="booking-form">
+      <form id="travelForm">
+        <input type="text" name="name" placeholder="Full Name" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <input type="text" name="whatsapp" placeholder="WhatsApp Number" required>
+        <input type="text" name="phone" placeholder="Call Number" required>
+        <input type="text" name="passportNumber" placeholder="Passport Number" required>
+        <select name="service" required>
+  <option value="" disabled selected>Select Service</option>
+  <option value="Flight Booking">Flight Booking</option>
+  <option value="Hotel Reservation">Hotel Reservation</option>
+  <option value="Full Holiday Package">Full Holiday Package</option>
+  <option value="Visa Consultation">Visa Consultation</option>
+</select>
+        <input type="date" name="travelDate" required>
+        <textarea name="message" rows="4" placeholder="Any special requests?"></textarea>
+        <button type="submit">Confirm Booking Request</button>
+        <div id="formLoading" style="margin-top:10px; font-size:14px; color:#fff; display:none;">Sending your request...</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  emailjs.init("j8oWlzoRfq2cZQkNp");
+  const form = document.getElementById('travelForm');
+  const loadingIndicator = document.getElementById('formLoading');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    loadingIndicator.style.display = 'block';
+
+    emailjs.sendForm('service_2vi7dmo', 'template_vqes7bh', this)
+      .then(() => {
+        alert('Booking request sent successfully! Our travel consultant will contact you.');
+        form.reset();
+      })
+      .catch((error) => {
+        console.error('EmailJS error:', error);
+        alert('Oops! Something went wrong. Please try again.');
+      })
+      .finally(() => {
+        loadingIndicator.style.display = 'none';
+      });
+  });
+</script>
+</body>
+</html>
